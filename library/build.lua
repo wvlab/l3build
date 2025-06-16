@@ -26,6 +26,7 @@ modules = {}
 exclmodules = {}
 
 --#endregion
+
 --#region
 
 -- Top level directory for the module/bundle
@@ -61,6 +62,7 @@ texmfdir = maindir .. "/texmf"
 textfiledir = "."
 
 --#endregion
+
 --#region
 
 -- Directory for building and testing
@@ -104,6 +106,7 @@ tdsdir = distribdir .. "/tds"
 tdsroot = "latex"
 
 --#endregion
+
 --#region
 
 -- Secondary files to be saved as part of running tests
@@ -122,83 +125,83 @@ binaryfiles = { "*.pdf", "*.zip" }
 --- @type string[]
 bstfiles = { "*.bst" }
 
---  Extra files unpacked purely for tests
+-- Extra files unpacked purely for tests
 --- @type string[]
 checkfiles = {}
 
---  Files needed for performing regression tests
+-- Files needed for performing regression tests
 --- @type string[]
 checksuppfiles = {}
 
---  Files to delete when cleaning
+-- Files to delete when cleaning
 --- @type string[]
 cleanfiles = { "*.log", "*.pdf", "*.zip" }
 
---  Files which show how to use a module.
+-- Files which show how to use a module.
 --- @type string[]
 demofiles = {}
 
---  Files which are part of the documentation but should not be typeset
+-- Files which are part of the documentation but should not be typeset
 --- @type string[]
 docfiles = {}
 
---  Secondary files to be cleared before each test is run
+-- Secondary files to be cleared before each test is run
 --- @type string[]
 dynamicfiles = {}
 
---  Files to ignore entirely
+-- Files to ignore entirely
 --- @type string[]
 excludefiles = { "*~", "build.lua", "config-*.lua" }
 
---  Files to install to the tex area of the texmf tree
+-- Files to install to the tex area of the texmf tree
 --- @type string[]
 installfiles = { "*.sty", "*.cls" }
 
---  MakeIndex files to be included in a TDS-style zip
+-- MakeIndex files to be included in a TDS-style zip
 --- @type string[]
 makeindexfiles = { "*.ist" }
 
---  Files to install to the scripts area of the texmf tree
+-- Files to install to the scripts area of the texmf tree
 --- @type string[]
 scriptfiles = {}
 
---  Files to install to the doc/man area of the texmf tree
+-- Files to install to the doc/man area of the texmf tree
 --- @type string[]
 scriptmanfiles = {}
 
---  Files to copy for unpacking
+-- Files to copy for unpacking
 --- @type string[]
 sourcefiles = { "*.dtx", "*.ins", "*-????-??-??.sty" }
 
---  Files for automatic tagging
+-- Files for automatic tagging
 --- @type string[]
 tagfiles = { "*.dtx" }
 
---  Plain text files to send to CTAN as-is
+-- Plain text files to send to CTAN as-is
 --- @type string[]
 textfiles = { "*.md", "*.txt" }
 
---  Files to typeset before the documentation for inclusion in main documentation files.
+-- Files to typeset before the documentation for inclusion in main documentation files.
 --- @type string[]
 typesetdemofiles = {}
 
---  Files to typeset for documentation
+-- Files to typeset for documentation
 --- @type string[]
 typesetfiles = { "*.dtx" }
 
---  Files needed to support typesetting when "sandboxed"
+-- Files needed to support typesetting when "sandboxed"
 --- @type string[]
 typesetsuppfiles = {}
 
---  Files to copy to unpacking when typesetting
+-- Files to copy to unpacking when typesetting
 --- @type string[]
 typesetsourcefiles = {}
 
---  Files to run to perform unpacking
+-- Files to run to perform unpacking
 --- @type string[]
 unpackfiles = { "*.ins" }
 
---  Files needed to support unpacking when "sandboxed"
+-- Files needed to support unpacking when "sandboxed"
 --- @type string[]
 unpacksuppfiles = {}
 
@@ -532,4 +535,119 @@ options = {}
 
 --#endregion
 
--- TODO: add functions
+--#region
+-- Utility functions
+
+-- Returns a string which gives the absolute location of the `target` directory
+--- @param target string
+--- @return string
+function abspath(target) end
+
+-- Returns a string comprising the path to a `file` with the name removed
+-- (i.e. up to the last /). Where the `file` has no path data, "." is returned
+--- @param file string
+--- @return string
+function dirname(file) end
+
+-- Returns a string comprising the full name of the ⟨file ⟩ with the path
+-- removed (i.e. from the last / onward)
+--- @param file string
+--- @return string
+function basename(file) end
+
+-- Removes any content within the `dir`; returns an error level.
+--- @param dir string
+--- @return integer
+function cleandir(dir) end
+
+-- Copies files matching the `glob` from the `source` directory to the `destination`;
+-- returns an error level.
+--- @param glob string
+--- @param source string
+--- @param destination string
+--- @return integer
+function cp(glob, source, destination) end
+
+-- Tests if the `dir` exists; returns a boolean value.
+--- @param dir string
+--- @return boolean
+function direxists(dir) end
+
+-- Tests if the `file` exists and is readable; returns a boolean value.
+--- @param file string
+--- @return boolean
+function fileexists(file) end
+
+-- Returns a table of all files in `path` matching `glob` (or all files if glob is absent).
+--- @param path string
+--- @param glob? string
+--- @return string[]
+function filelist(path, glob) end
+
+-- Returns a sorted table of all files in `path` matching `glob` (or all files if glob is absent).
+--- @param path string
+--- @param glob? string
+--- @return string[]
+function ordered_filelist(path, glob) end
+
+-- Converts the `glob` to a Lua pattern string.
+--- @param glob string
+--- @return string
+function glob_to_pattern(glob) end
+
+-- Returns the jobname of `file` (path and extension removed).
+--- @param file string
+--- @return string
+function jobname(file) end
+
+-- Creates the `dir`; returns an error level.
+--- @param dir string
+--- @return integer
+function mkdir(dir) end
+
+-- Renames `source` to `destination` within `dir`; returns an error level.
+--- @param dir string
+--- @param source string
+--- @param destination string
+--- @return integer
+function ren(dir, source, destination) end
+
+-- Removes files in `dir` matching `glob`; returns an error level.
+--- @param dir string
+--- @param glob string
+--- @return integer
+function rm(dir, glob) end
+
+-- Executes `cmd` starting in `dir`; returns an error level.
+--- @param dir string
+--- @param cmd string
+--- @return integer
+function run(dir, cmd) end
+
+-- Splits `file` at last `/` and returns dirname and basename.
+--- @param file string
+--- @return string, string
+function splitpath(file) end
+
+-- Converts `/` to `\` in `path` on Windows; returns unchanged otherwise.
+--- @param path string
+--- @return string
+function normalize_path(path) end
+
+--#endregion
+
+--#region
+
+--- @type string
+os_concat = ""
+
+--- @type string
+os_null = ""
+
+--- @type string
+os_pathsep = ""
+
+--- @type string
+os_setenv = ""
+
+--#endregion
