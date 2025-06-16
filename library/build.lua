@@ -508,26 +508,26 @@ psext = ".ps"
 --
 -- **It is not recommended to affect its entries.**
 --- @class L3buildOptions
---- @field config string[] Array of configuration strings
---- @field date string Date string
---- @field dirty boolean Dirty flag
---- @field dry-run boolean Dry run flag
---- @field email string Email address
---- @field engine string[] Array of engine strings
---- @field epoch string Epoch string
---- @field file string File path
---- @field first boolean First flag
---- @field full boolean Full flag
---- @field halt-on-error boolean Halt on error flag
---- @field help boolean Help flag
---- @field message string Message string
---- @field names string[] Array of name strings
---- @field quiet boolean Quiet flag
---- @field rerun boolean Rerun flag
---- @field shuffle boolean Shuffle flag
---- @field stdengine boolean Standard engine flag
+--- @field config string[]? Array of configuration strings
+--- @field date string? Date string
+--- @field dirty boolean? Dirty flag
+--- @field dry-run boolean? Dry run flag
+--- @field email string? Email address
+--- @field engine string[]? Array of engine strings
+--- @field epoch string? Epoch string
+--- @field file string? File path
+--- @field first boolean? First flag
+--- @field full boolean? Full flag
+--- @field halt-on-error boolean? Halt on error flag
+--- @field help boolean? Help flag
+--- @field message string? Message string
+--- @field names string[]? Array of name strings
+--- @field quiet boolean? Quiet flag
+--- @field rerun boolean? Rerun flag
+--- @field shuffle boolean? Shuffle flag
+--- @field stdengine boolean? Standard engine flag
 --- @field target string Target string
---- @field texmfhome string TEXMFHOME path
+--- @field texmfhome string? TEXMFHOME path
 options = {}
 
 --#endregion
